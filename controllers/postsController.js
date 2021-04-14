@@ -19,12 +19,11 @@ const postsController = {
 
   update: async (req, res) => {
     let { id } = req.params;
-    let { texto, usuarios_id, img, n_likes } = req.body;
+    let { texto, img, n_likes } = req.body;
 
     let postAtualizado = await Post.update(
       {
         texto,
-        usuarios_id,
         img,
         n_likes,
       },
