@@ -7,26 +7,34 @@ const usuariosController = {
   create: async (req, res) => {
     let { nome, email, senha } = req.body;
 
-    Usuario.create({
+    let novoUsuario = await Usuario.create({
       nome,
       email,
       senha,
     });
-    return res.json(`Usuario adicionado ${nome}, ${email},${senha}`);
+    return res.json(novoUsuario);
   },
-  update: (req, res) => {
+  update: async (req, res) => {
     let { id } = req.params;
     let { nome, email, senha } = req.body;
-    Usuario.update(
+    let atualizado = await Usuario.update(
       {
         nome,
         email,
         senha,
       },
-      { where: { id: id } }
+      { where: { id } }
     );
 
-    return res.send(`retorno `);
+    return res.json(atualizado);
+  },
+
+  delete: async (req, res) => {
+    let { id } = req.params;
+    let usuarioDeletado = await Usuario.destroy({
+      where: { id },
+    });
+    return res.json(usuarioDeletado);
   },
 };
 module.exports = usuariosController;

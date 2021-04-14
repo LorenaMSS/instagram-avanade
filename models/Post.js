@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       texto: DataTypes.STRING,
       usuarios_id: DataTypes.STRING,
+      img: DataTypes.STRING,
       n_likes: DataTypes.STRING,
     },
     {
