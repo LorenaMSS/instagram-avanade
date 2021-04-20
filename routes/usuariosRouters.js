@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usuariosController = require('../controllers/usuariosController');
-
+//const validarCadastro = require('../middlewares/ValidarCadastro');
 /* GET users listing. */
 router.get('/', usuariosController.index);
 
