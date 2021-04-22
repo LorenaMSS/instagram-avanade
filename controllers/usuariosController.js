@@ -22,7 +22,7 @@ const usuariosController = {
       senha,
     });
 
-    return response.json(novoUsuario);
+    return response.redirect('usuarios/login');
   },
   update: async (request, response) => {
     const { id } = request.params;
