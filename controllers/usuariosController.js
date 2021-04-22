@@ -1,40 +1,46 @@
-const { Usuario } = require('../models');
+const { Usuario, sequelize } = require('../models/');
+
 const usuariosController = {
-  index: async (req, res) => {
-    const usuarios = await Usuario.findAll();
-    return res.render('usuarios', {listaUsuarios:usuarios});
-  },
-  create: async (req, res) => {
-    let { nome, email, senha } = req.body;
+    index: async (request, response) => {
+        const usuarios =  await Usuario.findAll();
+        
+        return response.render('usuarios', { listaUsuarios: usuarios });
+    },  
+    create: async (request, response) => {
+        const {nome, email, senha} = request.body;
 
-    let novoUsuario = await Usuario.create({
-      nome,
-      email,
-      senha,
-    });
-    return res.json(novoUsuario);
-  },
-  update: async (req, res) => {
-    let { id } = req.params;
-    let { nome, email, senha } = req.body;
-    let atualizado = await Usuario.update(
-      {
-        nome,
-        email,
-        senha,
-      },
-      { where: { id } }
-    );
+        const novoUsuario = await Usuario.create({
+            nome,
+            email,
+            senha
+        });
 
-    return res.json(atualizado);
-  },
+        return response.json(novoUsuario);
+    },
+    update: async (request, response) => {
+        const { id } = request.params;
+        const { nome, email, senha } = request.body;
 
-  delete: async (req, res) => {
-    let { id } = req.params;
-    let usuarioDeletado = await Usuario.destroy({
-      where: { id },
-    });
-    return res.json(usuarioDeletado);
-  },
-};
+        const usuarioAtualizado = await Usuario.update({
+            nome, 
+            email, 
+            senha
+        }, {
+            where: { id }
+        })
+
+        return response.send(usuarioAtualizado);
+    },
+    delete: async (request, response) => {
+        const { id } = request.params;
+
+        const usuarioDeconstado = await Usuario.destroy({
+            where: {id}
+        });
+
+        return response.json(usuarioDeconstado);
+        
+    }
+}
+
 module.exports = usuariosController;

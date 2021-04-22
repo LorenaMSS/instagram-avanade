@@ -1,51 +1,62 @@
-const { Post } = require('../models');
-const postsController = {
-  index: async (req, res) => {
-    let posts = await Post.findAll();
-    return res.json(posts);
-  },
-  create: async (req, res) => {
-    let { texto, usuarios_id, img, n_likes } = req.body;
+const { request } = require('express');
+const { Post } = require('../models/');
 
-    let novoPost = await Post.create({
-      texto,
-      usuarios_id,
-      img,
-      n_likes,
+const postsController = {
+  index: async (request, response) => {
+    const posts = await Post.findAll({
+      include: ['usuario', 'comentarios', 'curtiu'],
     });
 
-    return res.json(novoPost);
+    return response.render('index', { listaPosts: posts });
   },
+  show: async (request, response) => {
+    const { usuarios_id } = request.params;
 
-  update: async (req, res) => {
-    let { id } = req.params;
-    let { texto, img, n_likes } = req.body;
+    const postsUsuario = await Post.findAll({
+      where: {
+        usuarios_id,
+      },
+    });
 
-    let postAtualizado = await Post.update(
+    return response.json(postsUsuario);
+  },
+  create: async (request, response) => {
+    const { texto, img, usuarios_id } = request.body;
+
+    const novoPost = Post.create({
+      texto,
+      img,
+      usuarios_id,
+    });
+
+    return response.json(novoPost);
+  },
+  update: async (request, response) => {
+    const { id } = request.params;
+    const { texto, img, usuarios_id } = request.body;
+
+    const postAtualizado = Post.update(
       {
         texto,
         img,
-        n_likes,
+        usuarios_id,
       },
-      { where: { id } }
+      {
+        where: { id },
+      }
     );
 
-    return res.json(postAtualizado);
+    return response.json(postAtualizado);
   },
+  delete: async (request, response) => {
+    const { id } = request.params;
 
-  delete: async (req, res) => {
-    let { id } = req.params;
-    let deletePost = await Post.destroy({
+    const postDeletado = Post.destroy({
       where: { id },
     });
-    return res.json(deletePost);
-  },
-  show: async (req, res) => {
-    let { id } = req.params;
-    let mostrarPost = await Post.findAll({
-      where: { usuarios_id: id },
-    });
-    return res.json(mostrarPost);
+
+    return response.json(postDeletado);
   },
 };
+
 module.exports = postsController;
