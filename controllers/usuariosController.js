@@ -6,6 +6,10 @@ const usuariosController = {
 
     return response.render('usuarios', { listaUsuarios: usuarios });
   },
+
+  login: (request, response) => {
+    return response.render('login');
+  },
   registro: (request, response) => {
     return response.render('registro');
   },

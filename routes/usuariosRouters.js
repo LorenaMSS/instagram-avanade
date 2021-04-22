@@ -7,6 +7,8 @@ router.get('/', usuariosController.index);
 
 router.get('/registro', usuariosController.registro);
 
+router.get('/login', usuariosController.login);
+
 router.put('/:id', usuariosController.update);
 
 router.post('/', usuariosController.create);
