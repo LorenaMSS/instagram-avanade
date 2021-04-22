@@ -1,0 +1,95 @@
+/*body {
+  background-color: red;
+}*/
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+}
+main {
+  display: flex;
+  justify-content: center;
+  /*alinhamento na horiontal*/
+  align-items: center;
+  /*alinhamento na vertical*/
+  padding: 50px 0px;
+  /*150px para cima e para baixo, 0 para laterais */
+}
+.logo {
+  width: 150px;
+}
+
+/* inicio style login */
+
+.login {
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 40px 20px;
+  margin: 30px;
+}
+
+.login form input {
+  width: 100%;
+  height: 30px;
+  margin: 7px 0;
+  padding: 5px;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.login form button {
+  background-color: #0095f6;
+  color: #fff;
+  padding: 7px 10px;
+  margin: 20px 0px;
+  width: 100%;
+  border: none;
+}
+.banner img {
+  width: 300px;
+}
+/* ------------------fim style login---------------------------  */
+
+/*=========style registro==============*/
+
+.cadastro {
+  max-width: 100%;
+  width: 400px;
+  border: 1px solid #ccc;
+  padding: 30px 20px;
+  margin: 50px;
+}
+.cadastro form input {
+  max-width: 100%;
+  width: 350px;
+  height: 30px;
+  margin: 7px 0;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.cadastro form button {
+  background-color: #0095f6;
+  color: #fff;
+  padding: 7px 10px;
+  margin: 20px 0px;
+  width: 100%;
+  border: none;
+}
+.termos {
+  text-align: center;
+  font-size: smaller;
+}
+.cta-login {
+  text-align: center;
+  font-size: small;
+  border: 1px solid #ccc;
+  padding: 7px 10px;
+}
+.banner img {
+  width: 300px;
+}

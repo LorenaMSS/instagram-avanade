@@ -5,6 +5,8 @@ const usuariosController = require('../controllers/usuariosController');
 /* GET users listing. */
 router.get('/', usuariosController.index);
 
+router.get('/registro', usuariosController.registro);
+
 router.put('/:id', usuariosController.update);
 
 router.post('/', usuariosController.create);

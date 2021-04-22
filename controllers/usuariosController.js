@@ -1,46 +1,51 @@
 const { Usuario, sequelize } = require('../models/');
 
 const usuariosController = {
-    index: async (request, response) => {
-        const usuarios =  await Usuario.findAll();
-        
-        return response.render('usuarios', { listaUsuarios: usuarios });
-    },  
-    create: async (request, response) => {
-        const {nome, email, senha} = request.body;
+  index: async (request, response) => {
+    const usuarios = await Usuario.findAll();
 
-        const novoUsuario = await Usuario.create({
-            nome,
-            email,
-            senha
-        });
+    return response.render('usuarios', { listaUsuarios: usuarios });
+  },
+  registro: (request, response) => {
+    return response.render('registro');
+  },
+  create: async (request, response) => {
+    const { nome, email, senha } = request.body;
 
-        return response.json(novoUsuario);
-    },
-    update: async (request, response) => {
-        const { id } = request.params;
-        const { nome, email, senha } = request.body;
+    const novoUsuario = await Usuario.create({
+      nome,
+      email,
+      senha,
+    });
 
-        const usuarioAtualizado = await Usuario.update({
-            nome, 
-            email, 
-            senha
-        }, {
-            where: { id }
-        })
+    return response.json(novoUsuario);
+  },
+  update: async (request, response) => {
+    const { id } = request.params;
+    const { nome, email, senha } = request.body;
 
-        return response.send(usuarioAtualizado);
-    },
-    delete: async (request, response) => {
-        const { id } = request.params;
+    const usuarioAtualizado = await Usuario.update(
+      {
+        nome,
+        email,
+        senha,
+      },
+      {
+        where: { id },
+      }
+    );
 
-        const usuarioDeconstado = await Usuario.destroy({
-            where: {id}
-        });
+    return response.send(usuarioAtualizado);
+  },
+  delete: async (request, response) => {
+    const { id } = request.params;
 
-        return response.json(usuarioDeconstado);
-        
-    }
-}
+    const usuarioDeconstado = await Usuario.destroy({
+      where: { id },
+    });
+
+    return response.json(usuarioDeconstado);
+  },
+};
 
 module.exports = usuariosController;
